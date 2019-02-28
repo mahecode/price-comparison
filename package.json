@@ -1,10 +1,9 @@
 {
   "name": "pricecomparison",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",  
+    "start": "concurrently \"node index.js\" \"cd client && npm start\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
@@ -15,10 +14,22 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
+    "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "puppeteer": "^1.11.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahecode/price-comparison.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mahecode/price-comparison/issues"
+  },
+  "homepage": "https://github.com/mahecode/price-comparison#readme",
+  "description": ""
 }
