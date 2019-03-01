@@ -39,71 +39,75 @@ const GuttersGrid = (props) => {
     const { classes } = props;
     let flipkartGrid = null;
     let paytmGrid = null;
-    if(props.width === 'xs'){
-        flipkartGrid = <Cgrid data={props.data} />
-    }else{
-        flipkartGrid = props.data.map( (data, key) => {
-          return (<Grid key={key} container className={classes.root} spacing={16}>
-            <Grid style={{paddingTop: 25}} item xs={12}>
-            <Grid container className={classes.demo} justify="center" spacing={16}>
-                {data.flipkart.map((element,key) => {
-                    let handleChange = ()=>{
-                        window.open(element.link, '_blank');
-                    }
-                    return (
-                    <Grid key={key} item>
+    try {
+        if(props.width === 'xs'){
+            flipkartGrid = <Cgrid data={props.data} />
+        }else{
+            flipkartGrid = props.data.map( (data, key) => {
+              return (<Grid key={key} container className={classes.root} spacing={16}>
+                <Grid style={{paddingTop: 25}} item xs={12}>
+                <Grid container className={classes.demo} justify="center" spacing={16}>
+                    {data.flipkart.map((element,key) => {
+                        let handleChange = ()=>{
+                            window.open(element.link, '_blank');
+                        }
+                        return (
+                        <Grid key={key} item>
+                            <div onClick={handleChange}>
+                                <Paper className={classes.paper}>
+                                <Card className={classes.card}>
+                                    <CardActionArea>
+                                        <CardMedia component="img" image={element.imgSrc} className={classes.media} />
+                                        <CardContent>
+                                            <Typography variant="h5" component="h5">
+                                                {element.name}
+                                            </Typography>
+                                            <Typography component="h4">{element.price}</Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Paper>
+                            </div>
+                        </Grid>
+                    )})}
+                </Grid>
+                </Grid>
+             </Grid>)
+            })
+          paytmGrid = props.data.map( (data, key) => {
+            return (<Grid style={{marginTop: 30}} key={key} container className={classes.root} spacing={16}>
+              <Grid style={{paddingTop: 25}} item xs={12}>
+              <Grid container className={classes.demo} justify="center" spacing={16}>
+                  {data.paytm.map((element,key) => {
+                      let handleChange = ()=>{
+                          window.open(element.link, '_blank')
+                      }
+                      return (<Grid key={key} item>
                         <div onClick={handleChange}>
-                            <Paper className={classes.paper}>
-                            <Card className={classes.card}>
-                                <CardActionArea>
-                                    <CardMedia component="img" image={element.imgSrc} className={classes.media} />
-                                    <CardContent>
-                                        <Typography variant="h5" component="h5">
-                                            {element.name}
-                                        </Typography>
-                                        <Typography component="h4">{element.price}</Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Paper>
-                        </div>
-                    </Grid>
-                )})}
-            </Grid>
-            </Grid>
-         </Grid>)
-        })
-      paytmGrid = props.data.map( (data, key) => {
-        return (<Grid style={{marginTop: 30}} key={key} container className={classes.root} spacing={16}>
-          <Grid style={{paddingTop: 25}} item xs={12}>
-          <Grid container className={classes.demo} justify="center" spacing={16}>
-              {data.paytm.map((element,key) => {
-                  let handleChange = ()=>{
-                      window.open(element.link, '_blank')
-                  }
-                  return (<Grid key={key} item>
-                    <div onClick={handleChange}>
-                      <Paper className={classes.paper}>
-                          <Card className={classes.card}>
-                              <CardActionArea>
-                                  <CardMedia component="img" image={element.imgSrc} className={classes.media} />
-                                  <CardContent>
-                                      <Typography paragraph={true} gutterBottom variant="h5" component="h2">
-                                          {element.name}
-                                      </Typography>
-                                      <Typography component="h4">{element.cashback}</Typography>
-                                      <Typography component="h4">₹{element.price}</Typography>
-                                  </CardContent>
-                              </CardActionArea>
-                          </Card>
-                      </Paper>
-                      </div>
-                  </Grid>
-              )})}
-          </Grid>
-          </Grid>
-       </Grid>)
-      })
+                          <Paper className={classes.paper}>
+                              <Card className={classes.card}>
+                                  <CardActionArea>
+                                      <CardMedia component="img" image={element.imgSrc} className={classes.media} />
+                                      <CardContent>
+                                          <Typography paragraph={true} gutterBottom variant="h5" component="h2">
+                                              {element.name}
+                                          </Typography>
+                                          <Typography component="h4">{element.cashback}</Typography>
+                                          <Typography component="h4">₹{element.price}</Typography>
+                                      </CardContent>
+                                  </CardActionArea>
+                              </Card>
+                          </Paper>
+                          </div>
+                      </Grid>
+                  )})}
+              </Grid>
+              </Grid>
+           </Grid>)
+          })
+        }
+    } catch (error) {
+        console.log(error);
     }
     return (
     <div>

@@ -7,7 +7,12 @@ const amazon = require('./amazon/amazon');
 const pc = async (Query)=>{
     try {
         let priceCompared = {};
-        const browser = await puppeteer.launch({headless: true});
+        const browser = await puppeteer.launch({
+            'args' : [
+                '--no-sandbox',
+                '--disable-setuid-sandbox'
+            ]
+        });
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 926 });
         // flipkart method
