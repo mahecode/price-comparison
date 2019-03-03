@@ -9,7 +9,8 @@ const pc = async (Query)=>{
         let priceCompared = {};
         const browser = await puppeteer.launch({
             'args' : [
-                '--no-sandbox'
+                '--no-sandbox',
+                '--disable-setuid-sandbox'
             ]
         });
         const page = await browser.newPage();
