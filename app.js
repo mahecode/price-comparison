@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 
 const flipkart = require('./flipkart/flipkart');
 const paytm  = require('./paytm/paytm');
-const amazon = require('./amazon/amazon');
 
 const pc = async (Query)=>{
     try {
@@ -13,6 +12,7 @@ const pc = async (Query)=>{
                 '--disable-setuid-sandbox'
             ]
         });
+
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 926 });
         // flipkart method
