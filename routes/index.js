@@ -3,9 +3,6 @@ const router = express.Router();
 
 const productScraper = require('../app');
 
-router.get('/', (req,res)=>{
-    res.json({'hello': 'welcome'});
-})
 
 router.post('/data',(req,res)=>{
     //some logic
