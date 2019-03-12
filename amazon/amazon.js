@@ -1,8 +1,6 @@
-let aurl = 'https://www.amazon.in/s/?field-keywords=';
+let aurl = 'http://www.amazon.in/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=';
 
 const amazon = (query) => {
-    // query = query.split(' ');
-    // query = query.join('%20');
     aurl = aurl + query;
     return aurl;
 }

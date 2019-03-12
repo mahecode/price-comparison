@@ -63,8 +63,7 @@ class SearchBar extends React.Component {
     let data = this.state.value;
     axios.post('https://sleepy-peak-30654.herokuapp.com/data', {data})
       .then(res =>{
-        console.log(res);
-        this.setState({products: res.data, progressBar: false })
+        this.setState({products: [res.data[0], res.data[1]], progressBar: false })
       })
       .catch(e => {
         this.setState({progressBar: false, error: true})
@@ -99,11 +98,16 @@ class SearchBar extends React.Component {
          className={classes.progress} />)
      
     } else {
-      grid = (
-        <div>
-          <Grid data={this.state.products} />
-        </div>
-      );
+      try{
+        grid = (
+          <div>
+            <Grid data={this.state.products} />
+          </div>
+        );
+      }catch(err){
+        console.log(err);
+      }
+     
     }
     return (
       <div style={{paddingTop: 5}}>

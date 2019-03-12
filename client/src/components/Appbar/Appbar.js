@@ -24,7 +24,7 @@ const styles = {
 function ButtonAppBar(props) {
   const { classes } = props;
   const handleChange = ()=>{
-    window.open("https://drive.google.com/file/d/1Mpn1pYt5MccczfrJlpWNgABj8F7MHKey/view?usp=sharing", '_blank');
+    window.open("https://drive.google.com/open?id=1SumE5dozm9vY3rcXShXkqmM7IKPd_MEi", '_blank');
   }
   return (
     <div className={classes.root}>

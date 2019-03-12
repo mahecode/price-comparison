@@ -34,20 +34,21 @@ const styles = theme => ({
 });
 
 const GuttersGrid = (props) => {
-
-
     const { classes } = props;
+    let onComingData = props.data[0];
+    let amazonData = props.data[1];
     let flipkartGrid = null;
     let paytmGrid = null;
+    let amazonGrid = null;
+
     try {
         if(props.width === 'xs'){
             flipkartGrid = <Cgrid data={props.data} />
         }else{
-            flipkartGrid = props.data.map( (data, key) => {
-              return (<Grid key={key} container className={classes.root} spacing={16}>
+            flipkartGrid = (<Grid container className={classes.root} spacing={24}>
                 <Grid style={{paddingTop: 25}} item xs={12}>
-                <Grid container className={classes.demo} justify="center" spacing={16}>
-                    {data.flipkart.map((element,key) => {
+                <Grid container className={classes.demo} justify="center" spacing={24}>
+                    {onComingData.flipkart.map((element,key) => {
                         let handleChange = ()=>{
                             window.open(element.link, '_blank');
                         }
@@ -73,12 +74,11 @@ const GuttersGrid = (props) => {
                 </Grid>
                 </Grid>
              </Grid>)
-            })
-          paytmGrid = props.data.map( (data, key) => {
-            return (<Grid style={{marginTop: 30}} key={key} container className={classes.root} spacing={16}>
+
+          paytmGrid = (<Grid container className={classes.root} spacing={24}>
               <Grid style={{paddingTop: 25}} item xs={12}>
-              <Grid container className={classes.demo} justify="center" spacing={16}>
-                  {data.paytm.map((element,key) => {
+              <Grid container className={classes.demo} justify="center" spacing={24}>
+                  {onComingData.paytm.map((element,key) => {
                       let handleChange = ()=>{
                           window.open(element.link, '_blank')
                       }
@@ -104,16 +104,47 @@ const GuttersGrid = (props) => {
               </Grid>
               </Grid>
            </Grid>)
-          })
+
+        amazonGrid = (<Grid container className={classes.root} spacing={24}>
+            <Grid style={{paddingTop: 25}} item xs={12}>
+            <Grid container className={classes.demo} justify="center" spacing={24}>
+                {amazonData.map((element,key) => {
+                    let handleChange = ()=>{
+                        window.open(element.link, '_blank');
+                    }
+                    return (
+                    <Grid key={key} item>
+                        <div onClick={handleChange}>
+                            <Paper className={classes.paper}>
+                            <Card className={classes.card}>
+                                <CardActionArea>
+                                    <CardMedia component="img" image={element.imageSrc} className={classes.media} />
+                                    <CardContent>
+                                        <Typography variant="h5" component="h5">
+                                            {element.name}
+                                        </Typography>
+                                        <Typography component="h4">₹{element.price}</Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        </Paper>
+                        </div>
+                    </Grid>
+                )})}
+            </Grid>
+            </Grid>
+         </Grid>)
         }
     } catch (error) {
         console.log(error);
     }
     return (
     <div>
-      {props.width !== 'xs' ? <Typography style={{padding: 30}} align="center" variant="h3">Flipkart</Typography> : null }
+      {props.width !== 'xs' ? <Typography style={{padding : 30}} variant="h3" align="center">Amazon</Typography> : null}
+      {amazonGrid}
+      {props.width !== 'xs' ? <Typography style={{padding : 30}}  variant="h3" align="center">Flipkart</Typography> : null }
       {flipkartGrid}
-      {props.width !== 'xs' ? <Typography style={{paddingTop : 20}} variant="h3" align="center">Paytm</Typography> : null}
+      {props.width !== 'xs' ? <Typography style={{padding : 30}} variant="h3" align="center">Paytm</Typography> : null}
       {paytmGrid}
     </div>
     );

@@ -72,26 +72,17 @@ const pc = async (Query)=>{
         await page.goto(paytm(Query));
         console.log('paytm');
         let pproduct = await page.evaluate(() => {
-            let pproducts = [];
-            container = document.querySelectorAll('div._2i1r');
-            for (i = 0; i < 4; i++) {
-                let proJson = {}
-                element = container[i];
-                try {
-                    proJson.name = element.querySelector('div._2apC').innerText;
-                    proJson.price = element.querySelector('div._1kMS').innerText;
-                    proJson.cashback = element.querySelector('div._27VV').innerText;
-                    imgSelector = element.querySelector('div._3nWP img');
-                    proJson.imgSrc = imgSelector.getAttribute('src');
-                    linkSelector = element.querySelector('div._3WhJ a');
-                    proJson.link = 'https://paytmmall.com'+linkSelector.getAttribute('href');
-                    
-                } catch (exception) {
-                    console.log(exception);
+            container = document.querySelectorAll('div._3WhJ');
+            let paytmData = [0,1,2,3].map( element => {
+                return {
+                    name: container[element].querySelector('div._2apC').innerText,
+                    price: container[element].querySelector('div._1kMS').innerText,
+                    cashback: container[element].querySelector('div._27VV') !== null ? container[element].querySelector('div._27VV').innerText: null ,
+                    imgSrc: container[element].querySelector('._3nWP img').getAttribute('src'),
+                    link: 'https://paytmmall.com' + container[element].querySelector('._3WhJ a').getAttribute('href')
                 }
-                pproducts.push(proJson);
-            }
-            return pproducts
+            })
+            return paytmData;
         });
         priceCompared['paytm'] = pproduct;
         await browser.close();
