@@ -4,13 +4,12 @@ const rp = require('request-promise');
 const $ = require('cheerio');
 
 const productScraper = require('../app');
-
 let url = "http://www.amazon.in/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=";
 
 
 router.post('/data',(req,res)=>{
     //some logic
-    const query = req.body.data;
+    let query = req.body.data;
     let Queryurl = url + query;
     let amazonData = rp(Queryurl).then(html => {
         console.log("Amazon");

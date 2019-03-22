@@ -21,48 +21,32 @@ const pc = async (Query)=>{
             console.log('flipkart');
             if (await page.$('div._1UoZlX[data-tkid]') !== null){
                 let fproduct = await page.evaluate(() => {
-                    let fproducts = [];
                     prom = document.querySelectorAll('div._1UoZlX[data-tkid]');
-                    for (i = 0; i < 4; i++) {
-                        let proJson = {};
-                        let element = prom[i];
-                        try {
-                            proJson.name = element.querySelector('div._3wU53n').innerText;
-                            proJson.price = element.querySelector('div._1vC4OE').innerText;
-                            imgSelector = element.querySelector('div._3BTv9X img');
-                            proJson.imgSrc = imgSelector.getAttribute('src');
-                            linkSelector = element.querySelector('div._1UoZlX a');
-                            proJson.link = 'https://www.flipkart.com'+linkSelector.getAttribute('href');
-                        } catch (exception) {
-                            console.log(exception);
+                    let flipkartScrap = [0,1,2,3].map( element => {
+                        return{
+                            name : prom[element].querySelector('div._3wU53n').innerText,
+                            price: prom[element].querySelector('div._1vC4OE').innerText,
+                            imgSrc: prom[element].querySelector('div._3BTv9X img').getAttribute('src'),
+                            link: prom[element].querySelector('div._1UoZlX a').getAttribute('href')
                         }
-                        fproducts.push(proJson);
-                    }
-                    return fproducts
+                    })
+                    return flipkartScrap;
                 })
                 priceCompared['flipkart'] = fproduct;
                 
             }
             else{
                 let fproduct = await page.evaluate(() => {
-                    let fproducts = [];
                     prom = document.querySelectorAll('div._3liAhj[data-tkid]');
-                    for (i = 0; i < 4; i++) {
-                        let proJson = {};
-                        let element = prom[i];
-                        try {
-                            proJson.name = element.querySelector('a._2cLu-l').innerText;
-                            proJson.price = element.querySelector('div._1vC4OE').innerText;
-                            imgSelector = element.querySelector('div._3BTv9X img');
-                            proJson.imgSrc = imgSelector.getAttribute('src');
-                            linkSelector = element.querySelector('div._3liAhj a');
-                            proJson.link = 'https://www.flipkart.com'+linkSelector.getAttribute('href');
-                         } catch (exception) {
-            
+                    let flipkartScrap = [0,1,2,3].map( element =>{
+                        return{
+                            name: prom[element].querySelector('a._2cLu-l').innerText,
+                            price:  prom[element].querySelector('div._1vC4OE').innerText,
+                            imgSrc: prom[element].querySelector('div._3BTv9X img').getAttribute('src'),
+                            link: 'https://www.flipkart.com'+ prom[element].querySelector('div._3liAhj a').getAttribute('href')
                         }
-                        fproducts.push(proJson);
-                    }
-                    return fproducts
+                    })
+                    return flipkartScrap;
                 })
                 priceCompared['flipkart'] = fproduct;
             }
