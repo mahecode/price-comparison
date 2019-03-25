@@ -10,7 +10,7 @@ const routes = require('./routes/index');
 const port = process.env.PORT || 4000;
 
 
-
+app.use(require('prerender-node'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
