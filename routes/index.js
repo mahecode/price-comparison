@@ -4,21 +4,23 @@ const rp = require('request-promise');
 const $ = require('cheerio');
 
 const productScraper = require('../app');
-let url = "http://www.amazon.in/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=";
+let url = "https://www.amazon.in/s?k=";
 
 
 router.post('/data',(req,res)=>{
     //some logic
     let query = req.body.data;
-    let Queryurl = url + query;
+    let Queryurl = url + query + '&ref=nb_sb_noss';
+    console.log(Queryurl);
     let amazonData = rp(Queryurl).then(html => {
+        let x = -2;
         console.log("Amazon");
         let innerData = [0,1,2,3].map(element => {
             return {
-                name: $('h2', html)[element].attribs['data-attribute'],
-                price: $('.a-size-base.a-color-price.s-price.a-text-bold',html).children()[element].next['data'],
-                imageSrc : $('.s-access-image.cfMarker',html)[element].attribs['src'],
-                link: $('.s-access-image.cfMarker',html)['0'].parent.attribs['href']
+                name: $('.a-size-medium.a-color-base.a-text-normal', html)[element].children[0].data,
+                price: $('.a-price-whole', html)[x = x + 2].children[0].data,
+                imageSrc : $('.a-section.aok-relative.s-image-fixed-height', html).children()[element].attribs['src'],
+                link: Queryurl
             };
         });
         return innerData;

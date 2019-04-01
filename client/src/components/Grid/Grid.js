@@ -9,7 +9,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Helmet from 'react-helmet';
 
 import Cgrid from './Cgrid/Cgrid';
 
@@ -54,13 +53,6 @@ const GuttersGrid = (props) => {
                             window.open(element.link, '_blank');
                         }
                         return (
-                        <div>
-                            <Helmet>
-                                <title>{element.name}</title>
-                                <meta name="description" content={element.name + element.price} />
-                                <meta name="og:image" content={element.imgSrc} />
-                             </Helmet>
-                       
                         <Grid key={key} item>
                             <div onClick={handleChange}>
                                 <Paper className={classes.paper}>
@@ -78,7 +70,6 @@ const GuttersGrid = (props) => {
                             </Paper>
                             </div>
                         </Grid>
-                        </div>
                     )})}
                 </Grid>
                 </Grid>
