@@ -35,6 +35,21 @@ const pc = async (Query)=>{
                 priceCompared['flipkart'] = fproduct;
                 
             }
+            else if(await page.$('div.IIdQZO._1R0K0g._1SSAGr[data-tkid]') !== null){
+                let items = await page.evaluate(()=>{
+                    item = document.querySelectorAll('div.IIdQZO._1R0K0g._1SSAGr[data-tkid]');
+                    let flipkartScrap = [0,1,2,3].map( element => {
+                        return {
+                            name: item[element].querySelector('a._2mylT6').innerText,
+                            price: item[element].querySelector('div._1vC4OE').innerText,
+                            imgSrc: item[element].querySelector('div._3ZJShS img').getAttribute('src'),
+                            link : 'https://www.flipkart.com' + item[element].querySelector('a._2mylT6').getAttribute('href')
+                        }
+                    })
+                    return flipkartScrap
+                })
+                priceCompared['flipkart'] = items
+            }
             else{
                 let fproduct = await page.evaluate(() => {
                     prom = document.querySelectorAll('div._3liAhj[data-tkid]');

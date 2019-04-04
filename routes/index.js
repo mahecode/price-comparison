@@ -11,7 +11,6 @@ router.post('/data',(req,res)=>{
     //some logic
     let query = req.body.data;
     let Queryurl = url + query + '&ref=nb_sb_noss';
-    console.log(Queryurl);
     let amazonData = rp(Queryurl).then(html => {
         let x = -2;
         console.log("Amazon");
