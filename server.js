@@ -9,7 +9,7 @@ const routes = require('./routes/index');
 //middlewares
 const port = process.env.PORT || 4000;
 
-
+require('newrelic');
 app.use(require('prerender-node'));
 app.use(cors());
 app.use(bodyParser.json());
