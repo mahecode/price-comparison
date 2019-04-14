@@ -47,7 +47,7 @@ router.post('/data',(req,res)=>{
                                     name: $('.a-size-base-plus.a-color-base.a-text-normal',html)[ele].children[0].data,
                                     price: $('.a-price-whole',html)[x=x+2].children[0].data,
                                     imageSrc: $('.a-section.aok-relative.s-image-square-aspect',html).children()[ele].attribs['src'],
-                                    link: url
+                                    link: Queryurl
                                 }
                             })
                             return innerData

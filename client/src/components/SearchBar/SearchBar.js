@@ -61,7 +61,7 @@ class SearchBar extends React.Component {
     event.preventDefault()
     this.setState({progressBar: true, error: false})
     let data = this.state.value;
-    axios.post('https://sleepy-peak-30654.herokuapp.com/data', {data})
+    axios.post('http://localhost:4000/data', {data})
       .then(res =>{
         this.setState({products: [res.data[0], res.data[1]], progressBar: false })
       })
