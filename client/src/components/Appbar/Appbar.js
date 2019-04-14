@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AndroidIcon from '@material-ui/icons/AndroidRounded';
 
+import SideDrawer from '../SideDrawer/SideDrawer';
 
 const styles = {
   root: {
@@ -31,6 +32,7 @@ function ButtonAppBar(props) {
       <AppBar 
       position="fixed">
         <Toolbar>
+          <SideDrawer />
           <Typography variant="h4" color="inherit" className={classes.grow}>
             Kimatmilao
           </Typography>
