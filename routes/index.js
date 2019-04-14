@@ -26,16 +26,36 @@ router.post('/data',(req,res)=>{
             return innerData;
         } catch (error) {
             if(error){
-                let x = -1;
-                let innerData = [0,2,4,6].map( ele => {
-                    return {
-                        name: $('.a-link-normal.a-text-normal', html)[ele].children[0].next.children[0].data,
-                        price: $('.a-price-whole', html)[ele].children[0].data,
-                        imageSrc : $('.a-section.aok-relative.s-image-tall-aspect', html).children()[x = x + 1].attribs['src'],
-                        link: Queryurl
-                    };
-                });
-                return innerData
+                try {
+                    let x = -1;
+                    let innerData = [0,2,4,6].map( ele => {
+                        return {
+                            name: $('.a-link-normal.a-text-normal', html)[ele].children[0].next.children[0].data,
+                            price: $('.a-price-whole', html)[ele].children[0].data,
+                            imageSrc : $('.a-section.aok-relative.s-image-tall-aspect', html).children()[x = x + 1].attribs['src'],
+                            link: Queryurl
+                        };
+                    });
+                    return innerData   
+                } catch (error) {
+                    if(error){
+                        try {
+                            let x = -2;
+                        //  console.log($('.a-price-whole',html)[0].children[0].data);
+                            let innerData = [0,1,2,3].map( ele =>{
+                                return{
+                                    name: $('.a-size-base-plus.a-color-base.a-text-normal',html)[ele].children[0].data,
+                                    price: $('.a-price-whole',html)[x=x+2].children[0].data,
+                                    imageSrc: $('.a-section.aok-relative.s-image-square-aspect',html).children()[ele].attribs['src'],
+                                    link: url
+                                }
+                            })
+                            return innerData
+                        } catch (error) {
+                            console.log("Grid error 3");
+                        }
+                    }
+                }
             }
         }
     })
